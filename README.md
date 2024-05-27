@@ -5,7 +5,7 @@ This repository contains code for object detection and tracking in videos using 
 
 ## Demo 
 <p align="center">
-  <img src="data/helpers/test.gif" alt="demo" width="80%">
+  <img src="data/helper/test.gif" alt="demo" width="80%">
 </p>
 
 ## Installation
