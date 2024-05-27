@@ -1,0 +1,10 @@
+name: yolov10-deepsort
+
+dependencies:
+  - python==3.11
+  
+  - pip:
+    - torch
+    - absl-py
+    - git+https://github.com/THU-MIG/yolov10.git
+    - deep-sort-realtime
