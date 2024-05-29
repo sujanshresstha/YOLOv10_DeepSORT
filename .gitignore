@@ -1,0 +1,5 @@
+# 忽略 weights 文件夹
+weights/
+
+# 忽略 output 文件夹
+output/
