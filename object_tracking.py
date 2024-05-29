@@ -1,3 +1,4 @@
+import os
 import cv2
 import torch
 import datetime
@@ -16,11 +17,11 @@ flags.DEFINE_integer("class_id", None, "class ID to track")
 
 
 def main(_argv):
-    # Start time to compute FPS
-    start = datetime.datetime.now()
-
     # Initialize the video capture
     video_input = FLAGS.video
+    
+    # Make sure we have the output directory
+    os.makedirs(os.path.dirname(FLAGS.output), exist_ok=True)
 
     # Check if the video input is an integer (webcam index)
     if FLAGS.video.isdigit():
@@ -63,8 +64,13 @@ def main(_argv):
     # Create a list of random colors to represent each class
     np.random.seed(42)
     colors = np.random.randint(0, 255, size=(len(class_names), 3))
+    
+    frame_count = 0
 
     while True:
+        # Start time to compute FPS
+        start = datetime.datetime.now()
+        
         ret, frame = cap.read()
         if not ret:
             break
@@ -115,7 +121,8 @@ def main(_argv):
         end = datetime.datetime.now()
 
         # Show the time it took to process 1 frame
-        print(f"Time to process 1 frame: {(end - start).total_seconds():.2f} seconds")
+        print(f"Time to process frame {frame_count}: {(end - start).total_seconds():.2f} seconds")
+        frame_count += 1
 
         # Calculate the frames per second and draw it on the frame
         fps = f"FPS: {1 / (end - start).total_seconds():.2f}"
